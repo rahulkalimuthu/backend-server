@@ -1,0 +1,90 @@
+Perfect 🚀 Let’s set up an Express + TypeScript project from scratch. I’ll walk you step by step.
+
+🛠 1. Create a new project
+
+    mkdir express-ts-app
+    cd express-ts-app
+    npm init -y
+
+📦 2. Install dependencies
+
+    Core packages:
+    npm install express
+
+    Development dependencies (TypeScript + type defs):
+    npm install --save-dev typescript ts-node nodemon @types/node @types/express
+
+⚙️ 3. Initialize TypeScript
+
+    npx tsc --init
+
+
+    This generates a tsconfig.json. Open it and make sure some key options are set:
+
+    {
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "rootDir": "src",
+        "outDir": "dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true
+    }
+    }
+
+📂 4. Project structure
+
+    express-ts-app/
+    │── src/
+    │   └── index.ts
+    │── tsconfig.json
+    │── package.json
+
+
+📝 5. Create your Express app (src/index.ts)
+
+    import express, { Request, Response } from 'express';
+
+    const app = express();
+    const PORT = 3000;
+
+    // Middleware to parse JSON
+    app.use(express.json());
+
+    // Sample route
+    app.get('/', (req: Request, res: Response) => {
+    res.send('Hello from Express + TypeScript!');
+    });
+
+    // Start server
+    app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+    });
+
+🔄 6. Add scripts in package.json
+
+    Update "scripts" like this:
+
+    "scripts": {
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+    }
+
+🚀 7. Run the server in development
+
+    npm run dev
+
+
+    Now open http://localhost:3000
+    🎉
+
+
+📦 8. Build & run production
+
+    npm run build
+    npm start
+
+
+✅ Done! You now have a working Express + TypeScript project with live reloading in dev (nodemon + ts-node) and compiled code for production.
